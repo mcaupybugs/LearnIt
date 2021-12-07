@@ -13,6 +13,9 @@ class AppUser(models.Model):
     email = models.EmailField(max_length=40)
     password = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.email
+
     @property
     def token(self):
         return self._generate_jwt_token()
@@ -23,5 +26,6 @@ class AppUser(models.Model):
 
         token = jwt.encode({
             'id': self.pk,
-            'exp': int(dt.strftime('%s'))
+            'exp': int(dt.strftime('%S'))
         }, settings.SECRET_KEY, algorithm='HS256')
+        return token
