@@ -2,7 +2,24 @@ from django.http.response import Http404, HttpResponse, HttpResponseForbidden, J
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import AppUser
+import jwt
+from django.conf import settings
+
 # Create your views here.
+
+
+def check_login(token):
+    decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')
+    print(decoded_token)
+
+# function to check and remove the bearer from the front
+
+
+def check_and_remove_bearer(token):
+    PREFIX = 'Bearer '
+    if not token.startswith(PREFIX):
+        raise ValueError('Invalid Token')
+    return token[len(PREFIX):]
 
 
 def Home(request):
@@ -34,7 +51,16 @@ def login(request):
         currentUser = AppUser.objects.filter(email=email, password=password)
         if currentUser.count() == 0:
             return HttpResponseForbidden("User not found")
-        print(currentUser)
+        # print(currentUser)
         # print(currentUser[0].token)
         token = currentUser[0].token
     return JsonResponse({'token': token})
+
+
+def myCourses(request):
+    print(request.headers['Authorization'])
+    auth_header = request.headers['Authorization']
+    auth_token = check_and_remove_bearer(auth_header)
+    check_login(auth_token)
+    # check_login(request.headers)
+    return HttpResponse("My course page!")

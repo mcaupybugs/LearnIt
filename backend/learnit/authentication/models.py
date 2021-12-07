@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager
 )
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 import jwt
 from django.conf import settings
 
@@ -23,9 +23,10 @@ class AppUser(models.Model):
     def _generate_jwt_token(self):
 
         dt = datetime.now()+timedelta(days=60)
-
+        timestamp = dt.timestamp()
+        print(timestamp)
         token = jwt.encode({
             'id': self.pk,
-            'exp': int(dt.strftime('%S'))
+            'exp': int(timestamp)
         }, settings.SECRET_KEY, algorithm='HS256')
         return token
