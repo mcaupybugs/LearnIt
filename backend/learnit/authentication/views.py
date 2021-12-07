@@ -73,6 +73,7 @@ def myCourses(request):
         return HttpResponseForbidden("The token was invalid")
     else:
         # write the code here
-
+        course = AppUser.objects.get(pk=user_id).courses
+        print(course)
         # check_login(request.headers)
         return HttpResponse("My course page!")
