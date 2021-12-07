@@ -9,9 +9,16 @@ from django.conf import settings
 # Create your models here.
 
 
+class Course(models.Model):
+    name = models.CharField(max_length=30)
+    author = models.CharField(max_length=40)
+    link = models.CharField(max_length=100)
+
+
 class AppUser(models.Model):
     email = models.EmailField(max_length=40)
     password = models.CharField(max_length=20)
+    courses = models.ManyToManyField(Course)
 
     def __str__(self):
         return self.email

@@ -9,8 +9,14 @@ from django.conf import settings
 
 
 def check_login(token):
-    decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')
-    print(decoded_token)
+    try:
+        decoded_token = jwt.decode(
+            token, settings.SECRET_KEY, algorithms='HS256')
+        print(decoded_token)
+        return decoded_token['id']
+    except:
+        print("Invalid signature")
+        return None
 
 # function to check and remove the bearer from the front
 
@@ -61,6 +67,12 @@ def myCourses(request):
     print(request.headers['Authorization'])
     auth_header = request.headers['Authorization']
     auth_token = check_and_remove_bearer(auth_header)
-    check_login(auth_token)
-    # check_login(request.headers)
-    return HttpResponse("My course page!")
+    user_id = check_login(auth_token)
+    if user_id is None:
+        print("There was a issue with the token")
+        return HttpResponseForbidden("The token was invalid")
+    else:
+        # write the code here
+
+        # check_login(request.headers)
+        return HttpResponse("My course page!")
