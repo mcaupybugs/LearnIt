@@ -40,7 +40,7 @@ def signup(request):
         password = request.POST.get("password")
        # print(request.POST.get("email"))  # how to read variable from forms
        # raising the exception if the username already exists
-        existingUser = AppUser.objects.filter(email=email, password=password)
+        existingUser = AppUser.objects.filter(email=email)
         if existingUser.count() > 0:
             return HttpResponseForbidden("Useralready exists")
         user = AppUser(email=email, password=password)
