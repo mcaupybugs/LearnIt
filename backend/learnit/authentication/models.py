@@ -6,13 +6,8 @@ from datetime import datetime, time, timedelta
 import jwt
 from django.conf import settings
 
+from course.models import Course
 # Create your models here.
-
-
-class Course(models.Model):
-    name = models.CharField(max_length=30)
-    author = models.CharField(max_length=40)
-    link = models.CharField(max_length=100)
 
 
 class AppUser(models.Model):
