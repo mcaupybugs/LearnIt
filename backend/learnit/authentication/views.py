@@ -21,7 +21,7 @@ def check_login(token):
 # function to check and remove the bearer from the front
 
 
-def check_and_remove_bearer(token):
+def get_token_from_header(token):
     PREFIX = 'Bearer '
     if not token.startswith(PREFIX):
         raise ValueError('Invalid Token')
