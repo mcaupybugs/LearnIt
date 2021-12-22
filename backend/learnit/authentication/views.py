@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import AppUser
 import jwt
+import json
 from django.conf import settings
 
 # Create your views here.
@@ -28,36 +29,50 @@ def get_token_from_header(token):
     return token[len(PREFIX):]
 
 
-def Home(request):
-    return HttpResponse("hi there ")
+def get_json_from_body(body):
+    decoded_body = body.decode('utf-8')
+    body_data = json.loads(decoded_body)
+    return body_data
 
 
 @csrf_exempt
 def signup(request):
 
     if request.method == 'POST':
-        email = request.POST.get("email")
-        password = request.POST.get("password")
+        try:
+            body_data = get_json_from_body(request.body)
+            # print(body_data['email'])
+            email = body_data['email']
+            password = body_data['password']
        # print(request.POST.get("email"))  # how to read variable from forms
        # raising the exception if the username already exists
-        existingUser = AppUser.objects.filter(email=email)
-        if existingUser.count() > 0:
-            return HttpResponseForbidden("Useralready exists")
-        user = AppUser(email=email, password=password)
-        user.save()
-        print(user)
+            existingUser = AppUser.objects.filter(email=email)
+            if existingUser.count() > 0:
+                print("user already exists")
+                return HttpResponseForbidden("Useralready exists")
+            user = AppUser(email=email, password=password)
+            user.save()
+            print(user)
+        except Exception as e:
+            print(e)
     return HttpResponse("good")
 
 
 @csrf_exempt
 def login(request):
     if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        currentUser = AppUser.objects.filter(email=email, password=password)
-        if currentUser.count() == 0:
-            return HttpResponseForbidden("User not found")
-        # print(currentUser)
-        # print(currentUser[0].token)
-        token = currentUser[0].token
+        try:
+            body_data = get_json_from_body(request.body)
+            email = body_data['email']
+            password = body_data['password']
+            currentUser = AppUser.objects.filter(
+                email=email, password=password)
+            if currentUser.count() == 0:
+                print('User not found')
+                return HttpResponseForbidden("User not found")
+            # print(currentUser)
+            # print(currentUser[0].token)
+            token = currentUser[0].token
+        except Exception as e:
+            print(e)
     return JsonResponse({'token': token})
