@@ -30,8 +30,9 @@ export class AuthServce {
             //console.log(recievedToken['token'])   // to retrieve the token
             this.authStorageService.set('token', recievedToken['token'])   // setting the token to local storage
             console.log(this.authStorageService.get('token'))  // getting the local storage service 
-            console.log("data up")
-
         })
+    }
+    logout() {
+        localStorage.removeItem('token')
     }
 }

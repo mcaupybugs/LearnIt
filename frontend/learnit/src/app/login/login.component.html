@@ -1,24 +1,29 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email" formControlName="email">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-            formControlName="password">
-    </div>
-    <div *ngIf="loginMode == true">
-        <a class="link" style="cursor: pointer;" (click)="changeMode()">New User Signup</a>
-    </div>
-    <div *ngIf="loginMode == false">
-        <a class="link" style="cursor: pointer;" (click)="changeMode()">Already an User? Login</a>
-    </div>
-    <div *ngIf="loginMode==true">
-        <button type="submit" class="btn btn-primary">Login</button>
-    </div>
-    <div *ngIf="loginMode==false">
-        <button type="submit" class="btn btn-primary">Register</button>
-    </div>
-</form>
+<div>
+    <app-header></app-header>
+</div>
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Enter email" formControlName="email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                formControlName="password">
+        </div>
+        <div *ngIf="loginMode == true">
+            <a class="link" style="cursor: pointer;" (click)="changeMode()">New User Signup</a>
+        </div>
+        <div *ngIf="loginMode == false">
+            <a class="link" style="cursor: pointer;" (click)="changeMode()">Already an User? Login</a>
+        </div>
+        <div *ngIf="loginMode==true">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <div *ngIf="loginMode==false">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</div>
