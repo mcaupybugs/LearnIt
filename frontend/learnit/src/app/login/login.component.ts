@@ -8,9 +8,12 @@ import { AuthServce } from './auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  loginMode = true;
   constructor(private authService: AuthServce) {
   }
-
+  changeMode() {
+    this.loginMode = !this.loginMode
+  }
   ngOnInit() {
     this.loginForm = new FormGroup({
       'email': new FormControl(null),
@@ -18,8 +21,13 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.loginForm.value['email']);
-    const res = this.authService.signup(this.loginForm.value['email'], this.loginForm.value['password'])
-    console.log(res)
+    var email = this.loginForm.value['email']
+    var password = this.loginForm.value['password']
+    if (this.loginMode == true) {
+      this.authService.login(email, password)
+    } else {
+      console.log(this.loginForm.value['email']);
+      this.authService.signup(email, password)
+    }
   }
 }

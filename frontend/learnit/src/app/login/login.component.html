@@ -9,5 +9,16 @@
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
             formControlName="password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div *ngIf="loginMode == true">
+        <a class="link" style="cursor: pointer;" (click)="changeMode()">New User Signup</a>
+    </div>
+    <div *ngIf="loginMode == false">
+        <a class="link" style="cursor: pointer;" (click)="changeMode()">Already an User? Login</a>
+    </div>
+    <div *ngIf="loginMode==true">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+    <div *ngIf="loginMode==false">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
 </form>
