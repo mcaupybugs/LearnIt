@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
     })
   }
   ngOnInit(): void {
-    this.getCatalogue();
+    this.getCatalogue(); // to get the list of all the courses at homepage 
+
   }
 
 }

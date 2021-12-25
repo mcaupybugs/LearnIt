@@ -5,8 +5,11 @@
         </div>
         <div id="navbarSupportedContent">
             <ul class="navbar-nav nav-right">
-                <li class="nav-link nav-item btn btn-dark text-light" routerLinkActive="active"><a class="text-light"
-                        routerLink="/login">Login</a>
+                <li *ngIf="isLoggedIn == false" class="nav-link nav-item btn btn-dark text-light"
+                    routerLinkActive="active"><a class="text-light" routerLink="/login">Login</a>
+                </li>
+                <li *ngIf="isLoggedIn == true" class="nav-link nav-item btn btn-dark text-light"><a class="text-light"
+                        (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>

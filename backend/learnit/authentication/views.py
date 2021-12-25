@@ -1,4 +1,4 @@
-from django.http.response import Http404, HttpResponse, HttpResponseForbidden, JsonResponse
+from django.http.response import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseForbidden, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from .models import AppUser
@@ -44,6 +44,8 @@ def signup(request):
             # print(body_data['email'])
             email = body_data['email']
             password = body_data['password']
+            print(email)
+            print(password)
        # print(request.POST.get("email"))  # how to read variable from forms
        # raising the exception if the username already exists
             existingUser = AppUser.objects.filter(email=email)
@@ -53,9 +55,10 @@ def signup(request):
             user = AppUser(email=email, password=password)
             user.save()
             print(user)
+            return HttpResponse("good")
         except Exception as e:
             print(e)
-    return HttpResponse("good")
+            return HttpResponseBadRequest("Badd")
 
 
 @csrf_exempt
