@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
       this.catalogueCourses = recievedData
       console.log(this.catalogueCourses)
     })
-    console.log(this.catalogueCourses)
   }
   ngOnInit(): void {
+    this.getCatalogue();
   }
 
 }

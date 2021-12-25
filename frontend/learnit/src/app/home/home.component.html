@@ -1,8 +1,6 @@
 <div>
     <app-header></app-header>
 </div>
-<div class="container">
-    <button (click)='getCatalogue()'>
-        click me
-    </button>
+<div class="container" style="margin: 10px;">
+    <app-catalogue [catalogue]="catalogueCourses"></app-catalogue>
 </div>

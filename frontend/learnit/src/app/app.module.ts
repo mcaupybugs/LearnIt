@@ -7,13 +7,17 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { CatalogueComponent } from './catalogue/catalogue.component';
+import { CourseListingComponent } from './catalogue/course-listing/course-listing.component'
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    CatalogueComponent,
+    CourseListingComponent
   ],
   imports: [
     BrowserModule,
