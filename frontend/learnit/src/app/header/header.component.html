@@ -5,6 +5,9 @@
         </div>
         <div id="navbarSupportedContent">
             <ul class="navbar-nav nav-right">
+                <li *ngIf="isLoggedIn == true" class="nav-link nav-item btn btn-dark text-light"
+                    style="margin-right: 10px;"><a class="text-light" routerLink="/mycourses">My Courses</a>
+                </li>
                 <li *ngIf="isLoggedIn == false" class="nav-link nav-item btn btn-dark text-light"
                     routerLinkActive="active"><a class="text-light" routerLink="/login">Login</a>
                 </li>

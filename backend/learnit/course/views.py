@@ -46,6 +46,7 @@ def addCourse(request):
 
 def myCourses(request):
     # print(request.headers['Authorization'])
+    print(request.headers)
     auth_header = request.headers['Authorization']
     auth_token = get_token_from_header(auth_header)
     user_id = check_login(auth_token)

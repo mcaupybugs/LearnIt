@@ -9,7 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CatalogueComponent } from './catalogue/catalogue.component';
-import { CourseListingComponent } from './catalogue/course-listing/course-listing.component'
+import { CourseListingComponent } from './catalogue/course-listing/course-listing.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { CourseListingComponent } from './catalogue/course-listing/course-listin
     LoginComponent,
     HomeComponent,
     CatalogueComponent,
-    CourseListingComponent
+    CourseListingComponent,
+    MyCoursesComponent
   ],
   imports: [
     BrowserModule,
