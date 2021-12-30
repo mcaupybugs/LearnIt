@@ -14,6 +14,9 @@ export class MyCoursesComponent implements OnInit {
 
   constructor(private storageService: LocalStorageService, private router: Router, private http: HttpClient) { }
   courses!: Course[]
+  isBought = true;
+  catalogueTitle = "Your Catalogue"
+  catalogueText = "All the courses bought by you !!"
   getCourse() {
 
     var token = this.storageService.get('token');
@@ -25,7 +28,10 @@ export class MyCoursesComponent implements OnInit {
       headers: headers_object
     }
     this.http.get(this.apiRoot.concat('mycourse'), httpOptions).subscribe(data => {
-      console.log(data) // gets the course. need to make the function to add the course first
+      var parsedData = JSON.parse(JSON.stringify(data))
+      this.courses = parsedData
+      console.log(this.courses)
+
     })
   }
   ngOnInit(): void {

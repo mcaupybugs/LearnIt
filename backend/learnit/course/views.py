@@ -50,15 +50,25 @@ def myCourses(request):
     auth_header = request.headers['Authorization']
     auth_token = get_token_from_header(auth_header)
     user_id = check_login(auth_token)
+    print(user_id)
     if user_id is None:
         print("There was a issue with the token")
         return HttpResponseForbidden("The token was invalid")
     else:
         # write the code here
-        course = AppUser.objects.get(pk=user_id).courses
-        print(course)
-        # check_login(request.headers)
-        return HttpResponse("My course page!")
+        courses = AppUser.objects.get(pk=user_id).courses.all()
+
+        response_object = []
+        for course in courses.iterator():
+            current_object = {}
+            current_object['course_id'] = course.id
+            current_object['name'] = course.name
+            current_object['author'] = course.author
+            current_object['link'] = course.link
+            response_object.append(current_object)
+
+        print(response_object)
+        return JsonResponse(response_object, safe=False)
 
 
 def getCourseById(request, course_id):

@@ -9,6 +9,9 @@ import { Course } from '../model';
 })
 export class HomeComponent implements OnInit {
   private apiRoot = 'http://localhost:8000/'
+  isBought = false;
+  catalogueTitle = "Catalogue"
+  catalogueText = "All the courses available by us !!"
   constructor(private api: HttpClient) { }
   catalogueCourses!: Course[]
   getCatalogue() {  // check how to make tha application wait for res to return object

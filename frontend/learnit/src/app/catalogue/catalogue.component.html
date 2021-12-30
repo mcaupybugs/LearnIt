@@ -1,8 +1,9 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Catalogue</h5>
-        <h6 class="card-subtitle mb-2 text-muted">All the courses available by us !!</h6>
+        <h5 class="card-title">{{catalogueTitle}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{catalogueText}}</h6>
         <!-- make catalogue styling here  -->
-        <app-course-listing *ngFor="let course of catalogueCourses" [course]="course"></app-course-listing>
+        <app-course-listing *ngFor="let course of catalogueCourses" [course]="course" [isBought]="isBought">
+        </app-course-listing>
     </div>
 </div>

@@ -9,6 +9,9 @@ import { Course } from '../model';
 export class CatalogueComponent implements OnInit {
 
   @Input('catalogue') catalogueCourses!: Course[];
+  @Input('catalogue-title') catalogueTitle!: String;
+  @Input('catalogue-text') catalogueText!: String;
+  @Input('isBought') isBought!: Boolean;
   constructor() { }
 
   ngOnInit(): void {

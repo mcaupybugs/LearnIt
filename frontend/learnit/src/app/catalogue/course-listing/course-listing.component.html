@@ -12,6 +12,9 @@
                 <div class="col">
                     <a href="{{course.link}}">Go to course: {{course.name}}</a>
                 </div>
+                <div *ngIf="isLoggedIn==true" class="col">
+                    <a class="btn btn-dark" (click)="buyCourse()">Buy Course</a>
+                </div>
             </div>
 
         </div>
